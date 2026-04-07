@@ -152,7 +152,18 @@
     }
 
     .blog-section {
+        --blog-slide-width: min(320px, calc(50vw - 56px));
+        --blog-slider-frame-width: calc((var(--blog-slide-width) * 2) + var(--blog-slide-gap));
         padding-bottom: 50px;
+    }
+    .blog-slider-arrows button {
+        top: 95px;
+    }
+    .blog-slider-arrows button:first-child {
+        left: 0;
+    }
+    .blog-slider-arrows button:last-child {
+        right: 0;
     }
 
     .footer-title {
@@ -192,5 +203,14 @@
 
     .bike-selection-slider-arrow-next {
         right: 8px;
+    }
+
+    .blog-section {
+        --blog-slide-width: min(361px, calc(100vw - 76px));
+        --blog-slider-frame-width: var(--blog-slide-width);
+    }
+
+    .blog-slider-arrows button {
+        top: 88px;
     }
 }

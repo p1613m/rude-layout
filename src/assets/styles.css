@@ -637,7 +637,60 @@ body {
  * Blog section
  */
 .blog-section {
+  --blog-slide-width: 361px;
+  --blog-slide-gap: 20px;
+  --blog-slider-frame-width: calc((var(--blog-slide-width) * 3) + (var(--blog-slide-gap) * 2));
   padding-bottom: 80px;
+  overflow: visible;
+}
+.blog-slider {
+  position: relative;
+  width: min(100%, 1340px);
+  margin: 0 auto;
+  padding: 0 10px;
+  box-sizing: border-box;
+  overflow: visible;
+}
+.blog-slider-arrows {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+}
+.blog-slider-arrows button {
+  position: absolute;
+  top: 110px;
+  transform: translateY(-50%);
+  pointer-events: auto;
+  cursor: pointer;
+  z-index: 3;
+}
+.blog-slider-arrows button:first-child {
+  left: max(0px, calc(50% - (var(--blog-slider-frame-width) / 2) - 36px));
+}
+.blog-slider-arrows button:last-child {
+  right: max(0px, calc(50% - (var(--blog-slider-frame-width) / 2) - 36px));
+}
+.blog-slider-arrows button[disabled] {
+  opacity: 0.4;
+}
+.blog-slider-wrapper {
+  width: min(100%, var(--blog-slider-frame-width));
+  margin: 0 auto;
+  overflow: visible;
+  touch-action: pan-y;
+}
+.blog-slider-track {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--blog-slide-gap);
+  width: max-content;
+  transition: transform 0.35s ease;
+  will-change: transform;
+}
+.blog-slider-item {
+  width: var(--blog-slide-width) !important;
+  flex: 0 0 var(--blog-slide-width);
 }
 .blog-slider-image {
   width: 100%;
@@ -645,6 +698,8 @@ body {
   object-fit: cover;
   border-radius: 18px;
   margin-bottom: 18px;
+  opacity: 0.4;
+  transition: opacity 0.35s ease;
 }
 .blog-slider-item h3 {
   font-weight: 600;
@@ -652,12 +707,26 @@ body {
   line-height: 20px;
   color: var(--color-black);
   margin-bottom: 8px;
+  opacity: 0;
+  transition: opacity 0.35s ease;
 }
 .blog-slider-item p {
   font-weight: 400;
   font-size: 14px;
   line-height: 16px;
   color: #626262;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  overflow: hidden;
+}
+.blog-slider-item.is-visible .blog-slider-image,
+.blog-slider-item.is-visible h3,
+.blog-slider-item.is-visible p {
+  opacity: 1;
 }
 
 
