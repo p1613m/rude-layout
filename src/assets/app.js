@@ -24,78 +24,78 @@
     let startX = 0;
     let deltaX = 0;
     const buttons = slides.map((_, index) => {
-    const button = document.createElement("button");
-    button.type = "button";
-    button.setAttribute("aria-label", `Перейти к слайду ${index + 1}`);
-    button.addEventListener("click", () => setActiveSlide(index));
-    if (buttonsRoot) {
-        buttonsRoot.appendChild(button);
-    }
-    return button;
+        const button = document.createElement("button");
+        button.type = "button";
+        button.setAttribute("aria-label", `РџРµСЂРµР№С‚Рё Рє СЃР»Р°Р№РґСѓ ${index + 1}`);
+        button.addEventListener("click", () => setActiveSlide(index));
+        if (buttonsRoot) {
+            buttonsRoot.appendChild(button);
+        }
+        return button;
     });
 
     const updateState = () => {
-    slides.forEach((slide, index) => {
-        slide.classList.toggle("active", index === activeIndex);
-    });
+        slides.forEach((slide, index) => {
+            slide.classList.toggle("active", index === activeIndex);
+        });
 
-    buttons.forEach((button, index) => {
-        const isActive = index === activeIndex;
-        button.classList.toggle("active", isActive);
-        button.setAttribute("aria-pressed", String(isActive));
-    });
+        buttons.forEach((button, index) => {
+            const isActive = index === activeIndex;
+            button.classList.toggle("active", isActive);
+            button.setAttribute("aria-pressed", String(isActive));
+        });
 
-    if (prevButton) prevButton.disabled = activeIndex === 0;
-    if (nextButton) nextButton.disabled = activeIndex === slides.length - 1;
+        if (prevButton) prevButton.disabled = activeIndex === 0;
+        if (nextButton) nextButton.disabled = activeIndex === slides.length - 1;
     };
 
     const updatePosition = () => {
-    const currentSlide = slides[activeIndex];
-    const slideCenter = currentSlide.offsetLeft + currentSlide.offsetWidth / 2;
-    const wrapperCenter = wrapper.clientWidth / 2;
-    const maxOffset = Math.max(track.scrollWidth - wrapper.clientWidth, 0);
-    const offset = Math.min(Math.max(slideCenter - wrapperCenter, 0), maxOffset);
+        const currentSlide = slides[activeIndex];
+        const slideCenter = currentSlide.offsetLeft + currentSlide.offsetWidth / 2;
+        const wrapperCenter = wrapper.clientWidth / 2;
+        const maxOffset = Math.max(track.scrollWidth - wrapper.clientWidth, 0);
+        const offset = Math.min(Math.max(slideCenter - wrapperCenter, 0), maxOffset);
 
-    track.style.transform = `translate3d(${-offset}px, 0, 0)`;
+        track.style.transform = `translate3d(${-offset}px, 0, 0)`;
     };
 
     const setActiveSlide = (index) => {
-    activeIndex = Math.min(Math.max(index, 0), slides.length - 1);
-    updateState();
-    updatePosition();
+        activeIndex = Math.min(Math.max(index, 0), slides.length - 1);
+        updateState();
+        updatePosition();
     };
 
     if (prevButton) {
-    prevButton.addEventListener("click", () => setActiveSlide(activeIndex - 1));
+        prevButton.addEventListener("click", () => setActiveSlide(activeIndex - 1));
     }
 
     if (nextButton) {
-    nextButton.addEventListener("click", () => setActiveSlide(activeIndex + 1));
+        nextButton.addEventListener("click", () => setActiveSlide(activeIndex + 1));
     }
 
     wrapper.addEventListener("pointerdown", (event) => {
-    pointerId = event.pointerId;
-    startX = event.clientX;
-    deltaX = 0;
-    wrapper.setPointerCapture(pointerId);
+        pointerId = event.pointerId;
+        startX = event.clientX;
+        deltaX = 0;
+        wrapper.setPointerCapture(pointerId);
     });
 
     wrapper.addEventListener("pointermove", (event) => {
-    if (pointerId !== event.pointerId) return;
-    deltaX = event.clientX - startX;
+        if (pointerId !== event.pointerId) return;
+        deltaX = event.clientX - startX;
     });
 
     const finishSwipe = (event) => {
-    if (pointerId !== event.pointerId) return;
+        if (pointerId !== event.pointerId) return;
 
-    if (Math.abs(deltaX) > 50) {
-        setActiveSlide(activeIndex + (deltaX < 0 ? 1 : -1));
-    }
+        if (Math.abs(deltaX) > 50) {
+            setActiveSlide(activeIndex + (deltaX < 0 ? 1 : -1));
+        }
 
-    wrapper.releasePointerCapture(pointerId);
-    pointerId = null;
-    startX = 0;
-    deltaX = 0;
+        wrapper.releasePointerCapture(pointerId);
+        pointerId = null;
+        startX = 0;
+        deltaX = 0;
     };
 
     wrapper.addEventListener("pointerup", finishSwipe);
@@ -257,4 +257,115 @@
     });
 
     setActiveSlide(activeIndex);
+})();
+
+/**
+ * Header catalog menu
+ */
+(() => {
+    const header = document.querySelector(".header");
+    const toggle = document.querySelector(".header-left a:nth-of-type(3)");
+    const menu = document.querySelector(".catalog-menu");
+    const categories = Array.from(document.querySelectorAll(".catalog-menu-category"));
+    const previewBlocks = Array.from(document.querySelectorAll(".catalog-menu-products"));
+
+    if (!header || !toggle || !menu || !previewBlocks.length) return;
+
+    const showPreview = (previewName) => {
+        previewBlocks.forEach((block) => {
+            block.classList.toggle("is-active", block.dataset.previewContent === previewName);
+        });
+    };
+
+    const setOpen = (isOpen) => {
+        menu.classList.toggle("is-open", isOpen);
+        menu.setAttribute("aria-hidden", String(!isOpen));
+        toggle.setAttribute("aria-expanded", String(isOpen));
+    };
+
+    toggle.setAttribute("aria-controls", "catalog-menu");
+    toggle.setAttribute("aria-expanded", "false");
+
+    toggle.addEventListener("click", (event) => {
+        event.preventDefault();
+        setOpen(!menu.classList.contains("is-open"));
+    });
+
+    document.addEventListener("click", (event) => {
+        if (!menu.classList.contains("is-open")) return;
+        if (header.contains(event.target)) return;
+        setOpen(false);
+    });
+
+    document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") {
+            setOpen(false);
+        }
+    });
+
+    categories.forEach((category) => {
+        category.addEventListener("click", () => {
+            categories.forEach((item) => item.classList.remove("active"));
+            category.classList.add("active");
+            showPreview(category.dataset.preview || "");
+        });
+    });
+
+    showPreview(categories.find((item) => item.classList.contains("active"))?.dataset.preview || "");
+})();
+
+/**
+ * Catalog sort
+ */
+(() => {
+    const sort = document.querySelector(".catalog-filters-sort");
+    const toggle = sort?.querySelector(".catalog-filters-sort-toggle");
+
+    if (!sort || !toggle) return;
+
+    const setOpen = (isOpen) => {
+        sort.classList.toggle("is-open", isOpen);
+        toggle.setAttribute("aria-expanded", String(isOpen));
+    };
+
+    toggle.addEventListener("click", (event) => {
+        event.stopPropagation();
+        setOpen(!sort.classList.contains("is-open"));
+    });
+
+    document.addEventListener("click", (event) => {
+        if (!sort.contains(event.target)) {
+            setOpen(false);
+        }
+    });
+
+    document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") {
+            setOpen(false);
+        }
+    });
+})();
+
+/**
+ * FAQ
+ */
+(() => {
+    const items = Array.from(document.querySelectorAll(".faq-item"));
+
+    if (!items.length) return;
+
+    items.forEach((item) => {
+        const button = item.querySelector(".faq-item-toggle");
+
+        if (!button) return;
+
+        button.setAttribute("aria-expanded", "false");
+
+        button.addEventListener("click", () => {
+            const isOpen = item.classList.contains("is-open");
+
+            item.classList.toggle("is-open", !isOpen);
+            button.setAttribute("aria-expanded", String(!isOpen));
+        });
+    });
 })();

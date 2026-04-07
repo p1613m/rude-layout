@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Layout</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/reset.css">
+    <link rel="stylesheet" href="assets/styles.css">
+    <link rel="stylesheet" href="assets/media-tablet.css">
+  </head>
+  <body>
+    
+  <header class="header">
+    <div class="header-line">
+      <div class="container">
+        <nav class="header-left">
+          <a href="#" class="header-logo">
+            <svg width="53" height="19" viewBox="0 0 53 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M0 3.97241H5.98036C9.5346 3.97241 11.7516 5.74953 11.7516 8.5938C11.7516 10.58 10.6627 12.0653 8.82462 12.6489L12.5879 18.6075H8.55457L5.67111 13.6725H3.66313V18.6075H0V3.97241ZM5.35314 10.85C7.21302 10.85 7.98833 10.0747 7.98833 8.82029C7.98833 7.56585 7.21302 6.79054 5.35314 6.79054H3.65878V10.8457H5.35314V10.85Z" fill="white"/>
+              <path d="M13.3809 12.8798V3.97239H17.0396V12.8188C17.0396 14.7832 18.1678 15.724 19.9667 15.724C21.7656 15.724 22.8937 14.7832 22.8937 12.8188V3.97239H26.4915V12.8798C26.4915 16.495 23.9826 18.7556 19.9667 18.7556C15.9507 18.7556 13.3809 16.4993 13.3809 12.8798ZM16.7914 0H19.3438V2.76151H16.7914V0ZM20.5547 0H23.1071V2.76151H20.5547V0Z" fill="white"/>
+              <path d="M28.4951 3.97241H34.0356C38.6787 3.97241 41.584 6.7949 41.584 11.29C41.584 15.785 38.6787 18.6075 34.0356 18.6075H28.4951V3.97241ZM34.0399 15.785C36.3615 15.785 37.825 13.9252 37.825 11.29C37.825 8.65478 36.3615 6.7949 34.0399 6.7949H32.1583V15.785H34.0399Z" fill="white"/>
+              <path d="M42.9424 3.97241H52.9997V6.7949H46.6012V9.70014H51.9325V12.5226H46.6012V15.785H52.9997V18.6075H42.9424V3.97241Z" fill="white"/>
+            </svg>
+          </a>
+          <a href="#">О бренде</a>
+          <a href="#">Каталог</a>
+          <a href="#">Помощь с выбором</a>
+        </nav>
+        <div class="header-right">
+          <a href="#">Центр поддержки клиентов</a>
+          <a href="#">Наш блог</a>
+          <form class="header-search">
+            <input type="text" class="header-search-control" placeholder="Поиск">
+            <button class="header-search-button">
+              <svg width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M3.88776 0.0183702C3.44785 0.0731168 2.81447 0.265031 2.4216 0.462623C2.03615 0.656458 1.50969 1.04556 1.23451 1.33994C0.615447 2.00221 0.238891 2.72673 0.0667876 3.58665C-0.0233508 4.03701 -0.0220603 4.82987 0.069512 5.265C0.159306 5.69153 0.255725 5.97393 0.446556 6.36911C0.955839 7.42372 1.89038 8.24196 3.01399 8.61707C3.52032 8.78613 3.81672 8.83139 4.41832 8.83159C4.89749 8.83176 5.00492 8.82281 5.30889 8.75731C5.89214 8.6317 6.37183 8.43087 6.86749 8.10483L7.13704 7.92751L8.64559 9.43282C10.2411 11.0249 10.2135 11.0012 10.4696 10.9998C10.5803 10.9992 10.7674 10.9127 10.8482 10.8248C10.9285 10.7375 11.0002 10.5669 11 10.4638C10.9995 10.2136 11.0185 10.2356 9.43231 8.64612L7.92695 7.13763L8.10427 6.86808C8.43032 6.37244 8.63461 5.88474 8.75087 5.32422C9.0795 3.7403 8.51668 2.09154 7.29409 1.05658C6.4899 0.375786 5.57647 0.026859 4.53304 0.00190905C4.29644 -0.00376921 4.00606 0.00365835 3.88776 0.0183702ZM5.0067 1.15044C6.7183 1.43045 7.94605 3.09447 7.719 4.82646C7.44322 6.93023 5.36358 8.23643 3.35117 7.56986C2.22133 7.19564 1.34473 6.17195 1.13193 4.97822C1.08343 4.70624 1.08378 4.14016 1.13259 3.85978C1.35591 2.577 2.34766 1.50889 3.60673 1.19518C4.07584 1.07828 4.48569 1.06518 5.0067 1.15044Z" fill="#979797"/>
+              </svg>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="catalog-menu" id="catalog-menu" aria-hidden="true">
+      <div class="catalog-menu-panel">
+        <div class="catalog-menu-sidebar">
+          <h3>Все модели</h3>
+          <div class="catalog-menu-categories">
+            <button type="button" class="catalog-menu-category active" data-preview="mountain">
+              <span>Горные</span>
+              <svg width="8" height="8" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M3.96434 0.146371C4.15955 -0.0488403 4.47609 -0.0487416 4.67136 0.146371L7.85348 3.32848C8.04874 3.52375 8.04874 3.84025 7.85348 4.03551L4.67136 7.21763C4.47609 7.41274 4.15955 7.41284 3.96434 7.21763C3.76913 7.02241 3.76922 6.70587 3.96434 6.5106L6.29294 4.182L0.499998 4.182C0.223857 4.182 3.46032e-07 3.95814 3.21891e-07 3.682C2.9775e-07 3.40586 0.223857 3.182 0.499998 3.182L6.29294 3.182L3.96434 0.853399C3.76922 0.658126 3.76913 0.341583 3.96434 0.146371Z" fill="#979797"/>
+              </svg>
+            </button>
+            <button type="button" class="catalog-menu-category" data-preview="fat">
+              <span>Фэтбайки</span>
+              <svg width="8" height="8" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M3.96434 0.146371C4.15955 -0.0488403 4.47609 -0.0487416 4.67136 0.146371L7.85348 3.32848C8.04874 3.52375 8.04874 3.84025 7.85348 4.03551L4.67136 7.21763C4.47609 7.41274 4.15955 7.41284 3.96434 7.21763C3.76913 7.02241 3.76922 6.70587 3.96434 6.5106L6.29294 4.182L0.499998 4.182C0.223857 4.182 3.46032e-07 3.95814 3.21891e-07 3.682C2.9775e-07 3.40586 0.223857 3.182 0.499998 3.182L6.29294 3.182L3.96434 0.853399C3.76922 0.658126 3.76913 0.341583 3.96434 0.146371Z" fill="#979797"/>
+              </svg>
+            </button>
+            <button type="button" class="catalog-menu-category" data-preview="city">
+              <span>Городские</span>
+              <svg width="8" height="8" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M3.96434 0.146371C4.15955 -0.0488403 4.47609 -0.0487416 4.67136 0.146371L7.85348 3.32848C8.04874 3.52375 8.04874 3.84025 7.85348 4.03551L4.67136 7.21763C4.47609 7.41274 4.15955 7.41284 3.96434 7.21763C3.76913 7.02241 3.76922 6.70587 3.96434 6.5106L6.29294 4.182L0.499998 4.182C0.223857 4.182 3.46032e-07 3.95814 3.21891e-07 3.682C2.9775e-07 3.40586 0.223857 3.182 0.499998 3.182L6.29294 3.182L3.96434 0.853399C3.76922 0.658126 3.76913 0.341583 3.96434 0.146371Z" fill="#979797"/>
+              </svg>
+            </button>
+            <button type="button" class="catalog-menu-category" data-preview="folding">
+              <span>Складные</span>
+              <svg width="8" height="8" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M3.96434 0.146371C4.15955 -0.0488403 4.47609 -0.0487416 4.67136 0.146371L7.85348 3.32848C8.04874 3.52375 8.04874 3.84025 7.85348 4.03551L4.67136 7.21763C4.47609 7.41274 4.15955 7.41284 3.96434 7.21763C3.76913 7.02241 3.76922 6.70587 3.96434 6.5106L6.29294 4.182L0.499998 4.182C0.223857 4.182 3.46032e-07 3.95814 3.21891e-07 3.682C2.9775e-07 3.40586 0.223857 3.182 0.499998 3.182L6.29294 3.182L3.96434 0.853399C3.76922 0.658126 3.76913 0.341583 3.96434 0.146371Z" fill="#979797"/>
+              </svg>
+            </button>
+            <button type="button" class="catalog-menu-category" data-preview="cargo">
+              <span>Карго</span>
+              <svg width="8" height="8" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M3.96434 0.146371C4.15955 -0.0488403 4.47609 -0.0487416 4.67136 0.146371L7.85348 3.32848C8.04874 3.52375 8.04874 3.84025 7.85348 4.03551L4.67136 7.21763C4.47609 7.41274 4.15955 7.41284 3.96434 7.21763C3.76913 7.02241 3.76922 6.70587 3.96434 6.5106L6.29294 4.182L0.499998 4.182C0.223857 4.182 3.46032e-07 3.95814 3.21891e-07 3.682C2.9775e-07 3.40586 0.223857 3.182 0.499998 3.182L6.29294 3.182L3.96434 0.853399C3.76922 0.658126 3.76913 0.341583 3.96434 0.146371Z" fill="#979797"/>
+              </svg>
+            </button>
+            <button type="button" class="catalog-menu-category" data-preview="moped">
+              <span>Электромопеды</span>
+              <svg width="8" height="8" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M3.96434 0.146371C4.15955 -0.0488403 4.47609 -0.0487416 4.67136 0.146371L7.85348 3.32848C8.04874 3.52375 8.04874 3.84025 7.85348 4.03551L4.67136 7.21763C4.47609 7.41274 4.15955 7.41284 3.96434 7.21763C3.76913 7.02241 3.76922 6.70587 3.96434 6.5106L6.29294 4.182L0.499998 4.182C0.223857 4.182 3.46032e-07 3.95814 3.21891e-07 3.682C2.9775e-07 3.40586 0.223857 3.182 0.499998 3.182L6.29294 3.182L3.96434 0.853399C3.76922 0.658126 3.76913 0.341583 3.96434 0.146371Z" fill="#979797"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+        <div class="catalog-menu-preview">
+          <div class="catalog-menu-products is-active" data-preview-content="mountain">
+            <article class="catalog-menu-product">
+              <div class="catalog-menu-product-image-wrap">
+                <img src="assets/images/bike-selection-1.png" alt="" class="catalog-menu-product-image">
+              </div>
+              <h4>ATB A3-A3HGM</h4>
+            </article>
+            <article class="catalog-menu-product">
+              <div class="catalog-menu-product-image-wrap">
+                <img src="assets/images/bike-selection-1.png" alt="" class="catalog-menu-product-image">
+              </div>
+              <h4>ATB A2-A3HGM</h4>
+            </article>
+            <article class="catalog-menu-product">
+              <div class="catalog-menu-product-image-wrap">
+                <img src="assets/images/bike-selection-1.png" alt="" class="catalog-menu-product-image">
+              </div>
+              <h4>ATB Trail M1</h4>
+            </article>
+          </div>
+          <div class="catalog-menu-products" data-preview-content="fat">
+            <article class="catalog-menu-product">
+              <div class="catalog-menu-product-image-wrap">
+                <img src="assets/images/bike-selection-1.png" alt="" class="catalog-menu-product-image">
+              </div>
+              <h4>Fat 26 Pro</h4>
+            </article>
+            <article class="catalog-menu-product">
+              <div class="catalog-menu-product-image-wrap">
+                <img src="assets/images/bike-selection-1.png" alt="" class="catalog-menu-product-image">
+              </div>
+              <h4>Fat Urban X</h4>
+            </article>
+          </div>
+          <div class="catalog-menu-products" data-preview-content="city">
+            <article class="catalog-menu-product">
+              <div class="catalog-menu-product-image-wrap">
+                <img src="assets/images/bike-selection-1.png" alt="" class="catalog-menu-product-image">
+              </div>
+              <h4>Stadt SL-S3HWM</h4>
+            </article>
+            <article class="catalog-menu-product">
+              <div class="catalog-menu-product-image-wrap">
+                <img src="assets/images/bike-selection-1.png" alt="" class="catalog-menu-product-image">
+              </div>
+              <h4>City Flow A2</h4>
+            </article>
+            <article class="catalog-menu-product">
+              <div class="catalog-menu-product-image-wrap">
+                <img src="assets/images/bike-selection-1.png" alt="" class="catalog-menu-product-image">
+              </div>
+              <h4>Urban Ride Lite</h4>
+            </article>
+          </div>
+          <div class="catalog-menu-products" data-preview-content="folding">
+            <article class="catalog-menu-product">
+              <div class="catalog-menu-product-image-wrap">
+                <img src="assets/images/bike-selection-1.png" alt="" class="catalog-menu-product-image">
+              </div>
+              <h4>Fold Mini 20</h4>
+            </article>
+            <article class="catalog-menu-product">
+              <div class="catalog-menu-product-image-wrap">
+                <img src="assets/images/bike-selection-1.png" alt="" class="catalog-menu-product-image">
+              </div>
+              <h4>Fold City One</h4>
+            </article>
+            <article class="catalog-menu-product">
+              <div class="catalog-menu-product-image-wrap">
+                <img src="assets/images/bike-selection-1.png" alt="" class="catalog-menu-product-image">
+              </div>
+              <h4>Compact Move</h4>
+            </article>
+          </div>
+          <div class="catalog-menu-products" data-preview-content="cargo">
+            <article class="catalog-menu-product">
+              <div class="catalog-menu-product-image-wrap">
+                <img src="assets/images/bike-selection-1.png" alt="" class="catalog-menu-product-image">
+              </div>
+              <h4>Cargo Long Bed</h4>
+            </article>
+            <article class="catalog-menu-product">
+              <div class="catalog-menu-product-image-wrap">
+                <img src="assets/images/bike-selection-1.png" alt="" class="catalog-menu-product-image">
+              </div>
+              <h4>Cargo Family+</h4>
+            </article>
+            <article class="catalog-menu-product">
+              <div class="catalog-menu-product-image-wrap">
+                <img src="assets/images/bike-selection-1.png" alt="" class="catalog-menu-product-image">
+              </div>
+              <h4>Cargo Box S</h4>
+            </article>
+          </div>
+          <div class="catalog-menu-products" data-preview-content="moped">
+            <article class="catalog-menu-product">
+              <div class="catalog-menu-product-image-wrap">
+                <img src="assets/images/bike-selection-1.png" alt="" class="catalog-menu-product-image">
+              </div>
+              <h4>Moto E1</h4>
+            </article>
+          </div>
+          <a href="#" class="catalog-menu-link">Посмотреть все</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section class="about-page">
+    <div class="container">
+      <h1 class="about-page-title second-font">Познакомьтесь с брендом RUDE</h1>
+
+      <div class="about-page-grid">
+        <article class="about-page-card">
+          <h3>Это свобода в каждом километре</h3>
+          <p>Наш электротранспорт для города и отдыха — это повседневная мобильность: добраться до работы, съездить по делам, вырваться на природу, не думая о пробках, усталости и ограничениях.</p>
+          <p>Наша цель — сделать ежедневные поездки проще и свободнее. Больше движения, меньше компромиссов.</p>
+        </article>
+
+        <article class="about-page-card">
+          <h3>Это уверенность на дороге</h3>
+          <p>Каждая деталь, каждый компонент и даже кабель на электровелосипеде RUDE — не просто инженерное решение, а результат тщательной проработки.</p>
+          <p>Мы буквально одержимы мелочами: чтобы дроссель работал плавно, батарея не подвела в самый ответственный момент, а дисковые тормоза гарантировали безопасность.</p>
+        </article>
+
+        <article class="about-page-card">
+          <h3>Это электротранспорт для жизни</h3>
+          <p>Мы строим бренд вокруг людей — их ритма жизни, привычек и историй. Для нас продукт — это не только скорость и характеристики, а уверенность, комфорт и качество.</p>
+          <p>Мы не просто электротранспорт: мы сообщество, которое поддерживает, делится опытом и развивается вместе с вами. Чтобы каждый новый продукт решал ваши задачи — просто, честно и надолго.</p>
+        </article>
+
+        <article class="about-page-card">
+          <h3>Это поддержка на каждом этапе</h3>
+          <p>С RUDE покупка электровелосипеда — это только начало. Мы рядом на каждом километре: поможем настроить, подскажем по эксплуатации, быстро решим любой вопрос.</p>
+          <p>Ваше доверие и рекомендации друзьям — лучшая награда для нас. Вместе — к новым маршрутам!</p>
+        </article>
+      </div>
+
+      <div class="about-page-contact">
+        <h2>Как с нами связаться?</h2>
+        <a href="mailto:info@rude.com">info@rude.com</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-col">
+        <div class="footer-title">Электровелосипеды</div>
+        <nav>
+          <a href="#">RUDE ATB A3</a>
+          <a href="#">RUDE ATB A2</a>
+          <a href="#">RUDE Stadt SL</a>
+        </nav>
+      </div>
+      <div class="footer-col">
+        <div class="footer-title">Каталог</div>
+        <nav>
+          <a href="#">Горные</a>
+          <a href="#">Городские</a>
+          <a href="#">Фэтбайки</a>
+          <a href="#">Складные</a>
+          <a href="#">Карго</a>
+          <a href="#">Электромопеды</a>
+        </nav>
+      </div>
+      <div class="footer-col">
+        <div class="footer-title">Контакты</div>
+        <p>Сотрудничество:<br><a href="mailto:info@rude.com">Info@rude.com</a></p>
+        <p>Сервис:<br><a href="mailto:support@rude.com">support@rude.com</a></p>
+      </div>
+      <div class="footer-col">
+        <a href="#" class="footer-title">Политика конфиденциальности</a>
+        <a href="#" class="footer-title">Пользовательское соглашение</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/app.js"></script>
+  </body>
+</html>
