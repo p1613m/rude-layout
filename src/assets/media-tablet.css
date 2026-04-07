@@ -14,7 +14,7 @@
 
     .header-left,
     .header-right {
-        gap: 20px;
+        gap: 17px;
     }
 
     .header-search-control {
@@ -152,18 +152,15 @@
     }
 
     .blog-section {
-        --blog-slide-width: min(320px, calc(50vw - 56px));
+        --blog-slide-width: min(361px, calc((100vw - 120px) / 2));
         --blog-slider-frame-width: calc((var(--blog-slide-width) * 2) + var(--blog-slide-gap));
         padding-bottom: 50px;
     }
-    .blog-slider-arrows button {
-        top: 95px;
-    }
     .blog-slider-arrows button:first-child {
-        left: 0;
+        left: calc(50% - (var(--blog-slider-frame-width) / 2) - 50px);
     }
     .blog-slider-arrows button:last-child {
-        right: 0;
+        right: calc(50% - (var(--blog-slider-frame-width) / 2) - 50px);
     }
 
     .footer-title {
@@ -210,7 +207,10 @@
         --blog-slider-frame-width: var(--blog-slide-width);
     }
 
-    .blog-slider-arrows button {
-        top: 88px;
+    .blog-slider-arrows button:first-child {
+        left: calc(50% - (var(--blog-slider-frame-width) / 2) - 50px);
+    }
+    .blog-slider-arrows button:last-child {
+        right: calc(50% - (var(--blog-slider-frame-width) / 2) - 50px);
     }
 }

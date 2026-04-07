@@ -155,11 +155,12 @@
             return { min: 0, max: 0, visibleCount };
         }
 
-        const edgeOffset = Math.floor(visibleCount / 2);
+        const min = Math.floor((visibleCount - 1) / 2);
+        const max = slides.length - Math.ceil(visibleCount / 2);
 
         return {
-            min: edgeOffset,
-            max: slides.length - 1 - edgeOffset,
+            min,
+            max,
             visibleCount,
         };
     };
@@ -193,11 +194,15 @@
     };
 
     const updatePosition = () => {
-        const currentSlide = slides[activeIndex];
-        const slideCenter = currentSlide.offsetLeft + currentSlide.offsetWidth / 2;
+        const { start, end } = getVisibleRange();
+        const firstSlide = slides[start];
+        const lastSlide = slides[end];
+        const visibleGroupStart = firstSlide.offsetLeft;
+        const visibleGroupEnd = lastSlide.offsetLeft + lastSlide.offsetWidth;
+        const visibleGroupCenter = (visibleGroupStart + visibleGroupEnd) / 2;
         const wrapperCenter = wrapper.clientWidth / 2;
         const maxOffset = Math.max(track.scrollWidth - wrapper.clientWidth, 0);
-        const offset = Math.min(Math.max(slideCenter - wrapperCenter, 0), maxOffset);
+        const offset = Math.min(Math.max(visibleGroupCenter - wrapperCenter, 0), maxOffset);
 
         track.style.transform = `translate3d(${-offset}px, 0, 0)`;
     };
