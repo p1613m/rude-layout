@@ -1,0 +1,141 @@
+@media screen and (max-width: 1025px) {
+    .container,
+    .category .container {
+        max-width: 768px;
+    }
+
+    .button {
+        padding: 0 40px;
+        height: 50px;
+        line-height: 50px;
+        border-radius: 25px;
+        font-size: 16px;
+    }
+
+    .header-left,
+    .header-right {
+        gap: 20px;
+    }
+
+    .header-search-control {
+        width: 160px;
+    }
+
+    .hero span:first-child {
+        font-size: 50px;
+        line-height: 55px;
+    }
+    .hero span:last-child {
+        font-size: 25px;
+        line-height: 25px;
+    }
+    .hero-image {
+        width: 65%;
+    }
+
+    .section-title {
+        font-size: 30px;
+        line-height: 38px;
+        margin-bottom: 28px;
+    }
+
+    .why-rude,
+    .category,
+    .bike-selection {
+        padding-top: 30px;
+        padding-bottom: 50px;
+    }
+    .why-rude-list {
+        flex-wrap: wrap;
+    }
+    .why-rude-item {
+        flex-basis: calc(50% - 10px);
+    }
+
+    .bike-selection-slider h3 {
+        font-size: 24px;
+    }
+    .bike-selection-slide-characteristics-item h4 {
+        font-size: 16px;
+    }
+    .bike-selection-slider-image {
+        height: 210px;
+    }
+
+    .help-quiz .container {
+        padding: 40px 0;
+    }
+    .help-quiz h2 {
+        font-size: 26px;
+        line-height: 30px;
+    }
+    .help-quiz-wrapper {
+        max-width: 50%;
+    }
+    .help-quiz-image-1 {
+        top: 65px;
+        height: 117px;
+    }
+    .help-quiz-image-2 {
+        height: 150px;
+    }
+
+    .subscribe .container {
+        padding: 40px 0;
+    }
+    .subscribe h2 {
+        font-size: 26px;
+        line-height: 30px;
+    }
+    .subscribe-wrapper {
+        max-width: 50%;
+    }
+    .subscribe-image {
+        width: 44%;
+    }
+
+    .support-block {
+        padding: 50px 0;
+    }
+    .support-block .container > div:first-child {
+        display: none;
+    }
+    .support-block-wrapper {
+        flex-basis: 100%;
+    }
+    .support-block h2 {
+        font-size: 36px;
+        line-height: 35px;
+        margin-bottom: 20px;
+    }
+    .support-block-description {
+        font-size: 16px;
+        line-height: 17px;
+        margin-bottom: 19px;
+    }
+    .support-block-list {
+        margin-bottom: 20px;
+    }
+
+    .reviews {
+        padding-bottom: 50px;
+    }
+    .reviews-list {
+        flex-wrap: wrap;
+    }
+    .reviews-item {
+        flex-basis: calc(50% - 10px);
+    }
+
+    .blog-section {
+        padding-bottom: 50px;
+    }
+
+    .footer-title {
+        font-size: 16px;
+        margin-bottom: 10px;
+    }
+    .footer {
+        font-size: 14px;
+    }
+}
