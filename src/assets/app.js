@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Bike slider
  */
 (() => {
@@ -26,7 +26,7 @@
     const buttons = slides.map((_, index) => {
         const button = document.createElement("button");
         button.type = "button";
-        button.setAttribute("aria-label", `РџРµСЂРµР№С‚Рё Рє СЃР»Р°Р№РґСѓ ${index + 1}`);
+        button.setAttribute("aria-label", `Перейти к слайду ${index + 1}`);
         button.addEventListener("click", () => setActiveSlide(index));
         if (buttonsRoot) {
             buttonsRoot.appendChild(button);
@@ -315,33 +315,96 @@
 })();
 
 /**
- * Catalog sort
+ * Catalog sort and filters
  */
 (() => {
     const sort = document.querySelector(".catalog-filters-sort");
-    const toggle = sort?.querySelector(".catalog-filters-sort-toggle");
+    const sortToggle = sort?.querySelector(".catalog-filters-sort-toggle");
+    const filterItems = Array.from(document.querySelectorAll(".catalog-filters-item"));
 
-    if (!sort || !toggle) return;
+    if (!sort && !filterItems.length) return;
 
-    const setOpen = (isOpen) => {
-        sort.classList.toggle("is-open", isOpen);
-        toggle.setAttribute("aria-expanded", String(isOpen));
+    const closeSort = () => {
+        if (!sort || !sortToggle) return;
+
+        sort.classList.remove("is-open");
+        sortToggle.setAttribute("aria-expanded", "false");
     };
 
-    toggle.addEventListener("click", (event) => {
-        event.stopPropagation();
-        setOpen(!sort.classList.contains("is-open"));
+    const closeFilters = () => {
+        filterItems.forEach((item) => {
+            item.classList.remove("is-open");
+            item.removeAttribute("open");
+
+            const toggle = item.querySelector(".catalog-filters-item-toggle");
+
+            if (toggle) {
+                toggle.setAttribute("aria-expanded", "false");
+            }
+        });
+    };
+
+    const closeAll = () => {
+        closeSort();
+        closeFilters();
+    };
+
+    filterItems.forEach((item) => {
+        const toggle = item.querySelector(".catalog-filters-item-toggle");
+        const options = Array.from(item.querySelectorAll(".catalog-filters-item-list li"));
+
+        if (!toggle) return;
+
+        toggle.addEventListener("click", (event) => {
+            event.preventDefault();
+            event.stopPropagation();
+
+            const isOpen = item.classList.contains("is-open") || item.hasAttribute("open");
+
+            closeAll();
+
+            item.classList.toggle("is-open", !isOpen);
+            item.toggleAttribute("open", !isOpen);
+            toggle.setAttribute("aria-expanded", String(!isOpen));
+        });
+
+        options.forEach((option) => {
+            option.addEventListener("click", () => {
+                options.forEach((current) => current.classList.remove("active"));
+                option.classList.add("active");
+                item.classList.add("catalog-filters-item-touched");
+                item.classList.remove("is-open");
+                item.removeAttribute("open");
+                toggle.setAttribute("aria-expanded", "false");
+            });
+        });
     });
 
+    if (sort && sortToggle) {
+        sortToggle.addEventListener("click", (event) => {
+            event.stopPropagation();
+
+            const isOpen = sort.classList.contains("is-open");
+
+            closeAll();
+
+            sort.classList.toggle("is-open", !isOpen);
+            sortToggle.setAttribute("aria-expanded", String(!isOpen));
+        });
+    }
+
     document.addEventListener("click", (event) => {
-        if (!sort.contains(event.target)) {
-            setOpen(false);
+        const clickedInsideFilter = filterItems.some((item) => item.contains(event.target));
+        const clickedInsideSort = sort?.contains(event.target);
+
+        if (!clickedInsideFilter && !clickedInsideSort) {
+            closeAll();
         }
     });
 
     document.addEventListener("keydown", (event) => {
         if (event.key === "Escape") {
-            setOpen(false);
+            closeAll();
         }
     });
 })();
@@ -354,6 +417,15 @@
 
     if (!items.length) return;
 
+    const setItemState = (item, isOpen) => {
+        const button = item.querySelector(".faq-item-toggle");
+
+        if (!button) return;
+
+        item.classList.toggle("is-open", isOpen);
+        button.setAttribute("aria-expanded", String(isOpen));
+    };
+
     items.forEach((item) => {
         const button = item.querySelector(".faq-item-toggle");
 
@@ -364,8 +436,198 @@
         button.addEventListener("click", () => {
             const isOpen = item.classList.contains("is-open");
 
+            items.forEach((currentItem) => setItemState(currentItem, false));
+            setItemState(item, !isOpen);
+        });
+    });
+})();
+
+/**
+ * Product gallery and tabs
+ */
+(() => {
+    const productCard = document.querySelector(".product-card");
+
+    if (!productCard) return;
+
+    const slides = Array.from(productCard.querySelectorAll(".product-gallery-main-image"));
+    const thumbs = Array.from(productCard.querySelectorAll(".product-gallery-thumb"));
+    const thumbsTrack = productCard.querySelector(".product-gallery-thumbs");
+    const thumbsViewport = productCard.querySelector(".product-gallery-thumbs-viewport");
+    const prevButton = productCard.querySelector(".product-gallery-arrow-up");
+    const nextButton = productCard.querySelector(".product-gallery-arrow-down");
+    const tabs = Array.from(productCard.querySelectorAll(".product-tab-item"));
+
+    let activeIndex = 0;
+    let thumbOffset = 0;
+
+    const getThumbMetrics = () => {
+        const firstThumb = thumbs[0];
+
+        if (!firstThumb || !thumbsTrack || !thumbsViewport) {
+            return { isRow: false, step: 0, visibleCount: thumbs.length };
+        }
+
+        const styles = window.getComputedStyle(thumbsTrack);
+        const isRow = styles.flexDirection === "row";
+        const gap = parseFloat(styles.gap || "0");
+        const thumbSize = isRow ? firstThumb.offsetWidth : firstThumb.offsetHeight;
+        const viewportSize = isRow ? thumbsViewport.clientWidth : thumbsViewport.clientHeight;
+        const step = thumbSize + gap;
+        const visibleCount = step > 0 ? Math.max(1, Math.floor((viewportSize + gap) / step)) : thumbs.length;
+
+        return { isRow, step, visibleCount };
+    };
+
+    const updateThumbsPosition = () => {
+        if (!thumbsTrack) return;
+
+        const { isRow, step } = getThumbMetrics();
+        const offset = thumbOffset * step;
+
+        thumbsTrack.style.transform = isRow
+            ? `translate3d(${-offset}px, 0, 0)`
+            : `translate3d(0, ${-offset}px, 0)`;
+    };
+
+    const syncThumbOffset = () => {
+        const { visibleCount } = getThumbMetrics();
+        const maxOffset = Math.max(thumbs.length - visibleCount, 0);
+
+        if (activeIndex < thumbOffset) {
+            thumbOffset = activeIndex;
+        } else if (activeIndex >= thumbOffset + visibleCount) {
+            thumbOffset = activeIndex - visibleCount + 1;
+        }
+
+        thumbOffset = Math.min(Math.max(thumbOffset, 0), maxOffset);
+    };
+
+    const updateState = () => {
+        slides.forEach((slide, index) => {
+            slide.classList.toggle("is-active", index === activeIndex);
+        });
+
+        thumbs.forEach((thumb, index) => {
+            const isActive = index === activeIndex;
+            thumb.classList.toggle("is-active", isActive);
+            thumb.setAttribute("aria-pressed", String(isActive));
+        });
+
+        syncThumbOffset();
+        updateThumbsPosition();
+    };
+
+    const setTabState = (tab, isOpen) => {
+        const button = tab.querySelector(".product-tab-toggle");
+
+        if (!button) return;
+
+        tab.classList.toggle("is-open", isOpen);
+        button.setAttribute("aria-expanded", String(isOpen));
+    };
+
+    const setActiveSlide = (index) => {
+        activeIndex = Math.min(Math.max(index, 0), slides.length - 1);
+        updateState();
+    };
+
+    thumbs.forEach((thumb, index) => {
+        thumb.addEventListener("click", () => setActiveSlide(index));
+    });
+
+    if (prevButton) {
+        prevButton.addEventListener("click", () => {
+            thumbOffset = Math.max(thumbOffset - 1, 0);
+            updateThumbsPosition();
+        });
+    }
+
+    if (nextButton) {
+        nextButton.addEventListener("click", () => {
+            const { visibleCount } = getThumbMetrics();
+            const maxOffset = Math.max(thumbs.length - visibleCount, 0);
+            thumbOffset = Math.min(thumbOffset + 1, maxOffset);
+            updateThumbsPosition();
+        });
+    }
+
+    tabs.forEach((tab) => {
+        const button = tab.querySelector(".product-tab-toggle");
+
+        if (!button) return;
+
+        button.setAttribute("aria-expanded", "false");
+
+        button.addEventListener("click", () => {
+            const isOpen = tab.classList.contains("is-open");
+
+            tabs.forEach((currentTab) => setTabState(currentTab, false));
+            setTabState(tab, !isOpen);
+        });
+    });
+
+    window.addEventListener("resize", updateState);
+
+    updateState();
+})();
+
+/**
+ * Home burger
+ */
+(() => {
+    const header = document.querySelector(".header-home");
+    const toggle = header?.querySelector(".header-home-burger");
+    const panel = header?.querySelector(".header-home-mobile-panel");
+    const submenuItems = Array.from(header?.querySelectorAll(".header-home-mobile-item.has-children") || []);
+
+    if (!header || !toggle || !panel) return;
+
+    const setOpen = (isOpen) => {
+        panel.classList.toggle("is-open", isOpen);
+        panel.setAttribute("aria-hidden", String(!isOpen));
+        toggle.setAttribute("aria-expanded", String(isOpen));
+    };
+
+    toggle.addEventListener("click", () => {
+        setOpen(!panel.classList.contains("is-open"));
+    });
+
+    document.addEventListener("click", (event) => {
+        if (!panel.classList.contains("is-open")) return;
+        if (header.contains(event.target)) return;
+        setOpen(false);
+    });
+
+    document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") {
+            setOpen(false);
+        }
+    });
+
+    submenuItems.forEach((item) => {
+        const button = item.querySelector(".header-home-mobile-subtoggle");
+
+        if (!button) return;
+
+        button.addEventListener("click", () => {
+            const isOpen = item.classList.contains("is-open");
+
+            submenuItems.forEach((currentItem) => {
+                currentItem.classList.remove("is-open");
+                currentItem
+                    .querySelector(".header-home-mobile-subtoggle")
+                    ?.setAttribute("aria-expanded", "false");
+            });
+
             item.classList.toggle("is-open", !isOpen);
             button.setAttribute("aria-expanded", String(!isOpen));
         });
+    });
+
+    window.addEventListener("resize", () => {
+        if (window.innerWidth > 850) {
+            setOpen(false);
+        }
     });
 })();
